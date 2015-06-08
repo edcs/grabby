@@ -1,5 +1,6 @@
 <?php namespace Edcs\Grabby;
 
+use RuntimeException;
 use Symfony\Component\Process\Process;
 
 trait FindPhantomJs
@@ -9,7 +10,7 @@ trait FindPhantomJs
      *
      * @return string
      */
-    public function getPhantomInstallation()
+    protected function getPhantomInstallation()
     {
         $server = $this->phantomServer();
 
@@ -21,7 +22,7 @@ trait FindPhantomJs
      *
      * @return null|string
      */
-    private function phantomServer()
+    protected function phantomServer()
     {
         $phantom = new Process('which phantomjs');
         $phantom->run();
@@ -39,7 +40,7 @@ trait FindPhantomJs
      *
      * @return string
      */
-    private function phantomPackage()
+    protected function phantomPackage()
     {
         $system = $this->getSystem();
 
@@ -51,7 +52,7 @@ trait FindPhantomJs
      *
      * @return string
      */
-    private function getSystem()
+    protected function getSystem()
     {
         $uname = strtolower(php_uname());
 
@@ -62,7 +63,7 @@ trait FindPhantomJs
         } elseif (strpos($uname, 'linux') !== false) {
             return PHP_INT_SIZE === 4 ? 'linux-i686' : 'linux-x86_64';
         } else {
-            throw new \RuntimeException("Unknown operating system.");
+            throw new RuntimeException('Unknown operating system.');
         }
     }
 
@@ -72,7 +73,7 @@ trait FindPhantomJs
      * @param string $system
      * @return string
      */
-    private function getExtension($system)
+    protected function getExtension($system)
     {
         return $system == 'windows' ? '.exe' : '';
     }
