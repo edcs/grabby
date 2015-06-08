@@ -1,5 +1,6 @@
 {
     "name": "edcs/grabby",
+    "type": "library",
     "description": "Creates an image of a web page using just it's URL.",
     "license": "MIT",
     "authors": [
@@ -8,14 +9,16 @@
             "homepage": "http://ecs.io"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {
-        "php": ">=5.4.0",
-        "symfony/process": "2.7.0"
-    },
     "autoload": {
         "psr-4": {
             "Edcs\\Grabby\\": "src/"
         }
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/process": "2.7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.7"
     }
 }
