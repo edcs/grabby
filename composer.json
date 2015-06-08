@@ -1,0 +1,13 @@
+{
+    "name": "edcs/grabby",
+    "description": "Creates an image of a web page using just it's URL.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edward Coleridge Smith",
+            "email": "ecs@edcs.me"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
