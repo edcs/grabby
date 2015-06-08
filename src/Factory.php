@@ -100,6 +100,16 @@ class Factory
     }
 
     /**
+     * Getter for filename property.
+     *
+     * @return string
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
      * Setter for storage path property.
      *
      * @param $storagePath
@@ -114,6 +124,16 @@ class Factory
         } else {
             throw new RuntimeException('Storage path doesn\'t seem to exist.');
         }
+    }
+
+    /**
+     * Getter for storage path property.
+     *
+     * @return string
+     */
+    public function getStoragePath()
+    {
+        return $this->storagePath;
     }
 
     /**
@@ -133,7 +153,7 @@ class Factory
      *
      * @return string
      */
-    public function getScreengrabPath()
+    public function getScreengrabLocation()
     {
         return $this->storagePath . $this->filename;
     }
