@@ -1,8 +1,5 @@
-# Grabby
+# Grabby [![Build Status](https://travis-ci.org/edcs/Grabby.svg?branch=master)](https://travis-ci.org/edcs/Grabby)
 A PhantomJS adapter to generate screengrabs of webpages in PHP.
-
-## Quality
-[![Build Status](https://travis-ci.org/edcs/Grabby.svg?branch=master)](https://travis-ci.org/edcs/Grabby)
 
 ## Installation
 It is recommended that you install this library using Composer.
