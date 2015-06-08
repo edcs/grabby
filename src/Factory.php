@@ -111,7 +111,7 @@ class Factory
         $storagePath = rtrim($storagePath, '/') . '/';
 
         if (file_exists($storagePath)) {
-            $this->storagePath = $storagePath . '/';
+            $this->storagePath = $storagePath;
         } else {
             throw new RuntimeException('Storage path doesn\'t seem to exist.');
         }
