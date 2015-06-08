@@ -1,7 +1,6 @@
 <?php namespace Edcs\Grabby;
 
 use RuntimeException;
-use Symfony\Component\Process\Exception\ProcessTimedOutException;
 use Symfony\Component\Process\Process;
 
 class Factory
