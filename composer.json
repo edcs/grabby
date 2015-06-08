@@ -5,9 +5,17 @@
     "authors": [
         {
             "name": "Edward Coleridge Smith",
-            "email": "ecs@edcs.me"
+            "homepage": "http://ecs.io"
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php": ">=5.4.0",
+        "league/flysystem": "~1.1@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Edcs\\Grabby\\": "src/"
+        }
+    }
 }
