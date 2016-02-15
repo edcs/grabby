@@ -58,7 +58,7 @@ You can generate screengrabs in `png`, `jpg` or `pdf` formats. Simply suffix the
 
 Once you have run `grab()` to generate your screengrab file, you can either access the generated filenames path like so:
 
-```
+```php
 <?php
 
 use Edcs\Grabby\Factory;
