@@ -1,4 +1,4 @@
-# Grabby [ ![Codeship Status for edcs/grabby](https://codeship.com/projects/da4c26b0-b5f2-0133-6bbf-724fe1788ad4/status?branch=master)](https://codeship.com/projects/134212)
+# Grabby [ ![Codeship Status for edcs/grabby](https://codeship.com/projects/da4c26b0-b5f2-0133-6bbf-724fe1788ad4/status?branch=master)](https://codeship.com/projects/134212) [![StyleCI](https://styleci.io/repos/37073224/shield)](https://styleci.io/repos/37073224)
 
 A PhantomJS adapter to generate screengrabs of webpages in PHP.
 
