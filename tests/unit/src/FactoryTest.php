@@ -4,6 +4,7 @@ namespace Edcs\Grabby\Tests;
 
 use Edcs\Grabby\Factory;
 use PHPUnit_Framework_TestCase;
+use RuntimeException;
 
 class FactoryTest extends PHPUnit_Framework_TestCase
 {
@@ -81,5 +82,48 @@ class FactoryTest extends PHPUnit_Framework_TestCase
         $grabby = new Factory('http://github.com', 'grabby.png', $dir);
 
         $this->assertEquals($dir.'grabby.png', $grabby->getScreengrabLocation());
+    }
+
+    /**
+     * Ensures that Grabby can create a file from a website.
+     *
+     * @return void
+     */
+    public function testScreenshotCanBeGrabbed()
+    {
+        $grabby = new Factory('http://ecs.io', 'grabby.png', __DIR__.'/../../output/');
+
+        $grabby->grab();
+
+        $this->assertFileExists(__DIR__.'/../../output/grabby.png');
+    }
+
+    /**
+     * Ensures that Grabby can create a screengrab and that the file location can be chained.
+     *
+     * @return void
+     */
+    public function testFileLocationCanBeChained()
+    {
+        $grabby = new Factory('http://ecs.io', 'grabby.png', __DIR__.'/../../output/');
+
+        $this->assertEquals(
+            __DIR__.'/../../output/grabby.png',
+            $grabby->grab()->getScreengrabLocation()
+        );
+    }
+
+    /**
+     * Ensures that Grabby can create a screengrab and that the file contents can be chained.
+     *
+     * @return void
+     */
+    public function testFileContentsCanBeChained()
+    {
+        $grabby = new Factory('http://ecs.io', 'grabby.png', __DIR__.'/../../output/');
+
+        $this->assertNotNull(
+            $grabby->grab()->getScreengrab()
+        );
     }
 }
