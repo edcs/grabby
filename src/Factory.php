@@ -169,7 +169,7 @@ class Factory
      */
     public function getScreengrab()
     {
-        return file_get_contents($this->getFullFilename());
+        return file_get_contents($this->getScreengrabLocation());
     }
 
     /**
