@@ -56,7 +56,7 @@ trait FindPhantomJs
      */
     protected function getSystem()
     {
-        $uname = strtolower(php_uname());
+        $uname = strtolower($this->getUname());
 
         if (strpos($uname, 'darwin') !== false) {
             return 'macosx';
@@ -67,6 +67,16 @@ trait FindPhantomJs
         } else {
             throw new RuntimeException('Unknown operating system.');
         }
+    }
+
+    /**
+     * Returns the uname string.
+     *
+     * @return string
+     */
+    protected function getUname()
+    {
+        return php_uname();
     }
 
     /**
