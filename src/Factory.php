@@ -1,4 +1,6 @@
-<?php namespace Edcs\Grabby;
+<?php
+
+namespace Edcs\Grabby;
 
 use RuntimeException;
 use Symfony\Component\Process\Process;
@@ -50,7 +52,7 @@ class Factory
     private $allowedExtensions = [
         'png',
         'jpg',
-        'pdf'
+        'pdf',
     ];
 
     /**
@@ -64,8 +66,8 @@ class Factory
      * @param string $url
      * @param string $filename
      * @param string $storagePath
-     * @param int $viewportWidth
-     * @param int $viewportHeight
+     * @param int    $viewportWidth
+     * @param int    $viewportHeight
      */
     public function __construct(
         $url,
@@ -86,6 +88,7 @@ class Factory
      * Setter for filename property.
      *
      * @param string $filename
+     *
      * @throws RuntimeException
      */
     public function setFilename($filename)
@@ -113,11 +116,12 @@ class Factory
      * Setter for storage path property.
      *
      * @param $storagePath
+     *
      * @throws RuntimeException
      */
     public function setStoragePath($storagePath)
     {
-        $storagePath = rtrim($storagePath, '/') . '/';
+        $storagePath = rtrim($storagePath, '/').'/';
 
         if (file_exists($storagePath)) {
             $this->storagePath = $storagePath;
@@ -155,7 +159,7 @@ class Factory
      */
     public function getScreengrabLocation()
     {
-        return $this->storagePath . $this->filename;
+        return $this->storagePath.$this->filename;
     }
 
     /**
@@ -171,8 +175,9 @@ class Factory
     /**
      * Get the PhantomJS Process instance.
      *
-     * @return Process
      * @throws RuntimeException
+     *
+     * @return Process
      */
     protected function phantomProcess()
     {
@@ -186,6 +191,7 @@ class Factory
      * Creates the command string used to trigger PhantomJS.
      *
      * @param string command
+     *
      * @return string
      */
     protected function createPhantomCommand($phantomPath)
@@ -194,9 +200,9 @@ class Factory
             $phantomPath,
             self::GRABBY_JS,
             $this->url,
-            $this->storagePath . $this->filename,
+            $this->storagePath.$this->filename,
             $this->viewportWidth,
-            $this->viewportHeight
+            $this->viewportHeight,
         ];
 
         return implode(' ', $command);
