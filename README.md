@@ -6,7 +6,9 @@ A PhantomJS adapter to generate screengrabs of webpages in PHP.
 
 It is recommended that you install this library using Composer.
 
-    $ composer require edcs/grabby
+```bash
+$ composer require edcs/grabby
+```
 
 ## Dependencies
 
