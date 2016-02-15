@@ -1,4 +1,6 @@
-<?php namespace Edcs\Grabby\Tests;
+<?php
+
+namespace Edcs\Grabby\Tests;
 
 use Edcs\Grabby\Factory;
 use PHPUnit_Framework_TestCase;
@@ -33,6 +35,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      * Makes sure Grabby throws an exception if an invalid file extention is used.
      *
      * @expectedException RuntimeException
+     *
      * @return void
      */
     public function testInvalidFilenameIsRejected()
@@ -47,7 +50,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testValidPathIsAccepted()
     {
-        $dir = rtrim(__DIR__, '/') . '/';
+        $dir = rtrim(__DIR__, '/').'/';
 
         $grabby = new Factory('http://github.com', 'grabby.png', $dir);
 
@@ -58,6 +61,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      * Makes sure Grabby throws an exception if an invalid storage path is used.
      *
      * @expectedException RuntimeException
+     *
      * @return void
      */
     public function testInvalidPathIsRejected()
@@ -72,10 +76,10 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testValidFileLocationIsReturned()
     {
-        $dir = rtrim(__DIR__, '/') . '/';
+        $dir = rtrim(__DIR__, '/').'/';
 
         $grabby = new Factory('http://github.com', 'grabby.png', $dir);
 
-        $this->assertEquals($dir . 'grabby.png', $grabby->getScreengrabLocation());
+        $this->assertEquals($dir.'grabby.png', $grabby->getScreengrabLocation());
     }
 }

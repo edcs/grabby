@@ -1,4 +1,6 @@
-<?php namespace Edcs\Grabby;
+<?php
+
+namespace Edcs\Grabby;
 
 use RuntimeException;
 use Symfony\Component\Process\Process;
@@ -31,7 +33,7 @@ trait FindPhantomJs
             return trim($phantom->getOutput());
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -44,7 +46,7 @@ trait FindPhantomJs
     {
         $system = $this->getSystem();
 
-        return  __DIR__ . '/../bin/' . $system . '/phantomjs' . $this->getExtension($system);
+        return  __DIR__.'/../bin/'.$system.'/phantomjs'.$this->getExtension($system);
     }
 
     /**
@@ -71,6 +73,7 @@ trait FindPhantomJs
      * Get the binary extension for the system.
      *
      * @param string $system
+     *
      * @return string
      */
     protected function getExtension($system)
