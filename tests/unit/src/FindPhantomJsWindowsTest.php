@@ -16,7 +16,6 @@ trait FindPhantomJsWindowsStub
      */
     protected function phantomServer()
     {
-        return;
     }
 
     /**

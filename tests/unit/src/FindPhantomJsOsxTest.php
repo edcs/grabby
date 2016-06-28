@@ -16,7 +16,6 @@ trait FindPhantomJsOsxStub
      */
     protected function phantomServer()
     {
-        return;
     }
 
     /**
