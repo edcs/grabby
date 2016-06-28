@@ -29,19 +29,7 @@ class Factory
      */
     private $url;
 
-    /**
-     * The width of the screengrab viewport.
-     *
-     * @var int
-     */
-    private $viewportWidth;
-
-    /**
-     * The height of the screengrab viewport.
-     *
-     * @var int
-     */
-    private $viewportHeight;
+    private $config;
 
     /**
      * An array of allowed image types.
@@ -60,27 +48,29 @@ class Factory
     const GRABBY_JS = 'grabby.js';
 
     /**
+     * The number of seconds the PhantomJS should excecute for before failing.
+     */
+    const TIMEOUT = 120;
+
+    /**
      * Creates a new Grabby instance.
      *
      * @param string $url
      * @param string $filename
      * @param string $storagePath
-     * @param int    $viewportWidth
-     * @param int    $viewportHeight
+     * @param array  $config
      */
     public function __construct(
         $url,
         $filename = 'grabby.png',
         $storagePath = __DIR__,
-        $viewportWidth = 1920,
-        $viewportHeight = 1080
+        array $config = ['viewportSize' => ['width' => 1920, 'height' => 1080]]
     ) {
         $this->setFilename($filename);
         $this->setStoragePath($storagePath);
 
         $this->url = $url;
-        $this->viewportWidth = $viewportWidth;
-        $this->viewportHeight = $viewportHeight;
+        $this->config = $config;
     }
 
     /**
@@ -146,7 +136,7 @@ class Factory
      */
     public function grab()
     {
-        $this->phantomProcess()->setTimeout(10)->run();
+        $this->phantomProcess()->setTimeout(self::TIMEOUT)->run();
 
         return $this;
     }
@@ -197,8 +187,7 @@ class Factory
             self::GRABBY_JS,
             $this->url,
             $this->storagePath.$this->filename,
-            $this->viewportWidth,
-            $this->viewportHeight,
+            urlencode(json_encode($this->config)),
         ];
 
         return implode(' ', $command);

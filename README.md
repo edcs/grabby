@@ -17,9 +17,9 @@ correct binary for your system.
 
 # Getting Started
 
-The following snippet will run grabby it's most basic form, this will generate a screengrab of Google's home page in a PNG
-called `grabby.png` at a resolution of 1920x1080px. The file will be stored in the same directory which the Grabby `Factory`
-class is located.
+The following snippet will run grabby it's most basic form, this will generate a screengrab of Google's home page in a 
+PNG called `grabby.png` at a resolution of 1920x1080px. The file will be stored in the same directory which the Grabby 
+`Factory` class is located.
 
 ```php
 <?php
@@ -35,10 +35,10 @@ echo $grabby->grab();
 
 ## Extra Parameters
 
-You would probably like your screengrab to be stored in a different location and probably generated in a different size. You
-can pass Grabby some extra parameters to do this. The following example will generate a screengrab of Google's home page in a PNG
-called `screenshot.jpg` at a resolution of 150x200px. The file will be stored in `/my/storage/dir/`, an exception is thrown if 
-this directory doesn't exist.
+You would probably like your screengrab to be stored in a different location and probably generated in a different size.
+You can pass Grabby some extra parameters to do this. The following example will generate a screengrab of Google's home 
+page in a PNG called `screenshot.jpg` at a resolution of 150x200px. The file will be stored in `/my/storage/dir/`, an 
+exception is thrown if this directory doesn't exist.
 
 ```php
 <?php
@@ -47,14 +47,47 @@ use Edcs\Grabby\Factory;
 
 require 'vendor/autoload.php';
 
-$grabby = new Factory('http://www.google.co.uk', 'screenshot.png', '/my/storage/dir/', 150, 200);
+$grabby = new Factory('http://www.google.co.uk', 'screenshot.png', '/my/storage/dir/', [
+    'viewportSize' => [
+        'width' => 150,
+        'height' => 200
+    ]
+]);
 
 echo $grabby->grab();
-```    
+```
+
+Grabby also supports creating PDF versions of web pages in different paper sizes. You can use the same config as above
+to create PDF renderings using a viewport size, or, you can use the following paper size config:
+
+```php
+<?php
+
+use Edcs\Grabby\Factory;
+
+require 'vendor/autoload.php';
+
+$grabby = new Factory('http://www.google.co.uk', 'screenshot.pdf', '/my/storage/dir/', [
+    'paperSize' => [
+        'format' => 'A4',
+        'orientation' => 'portrait',
+        'margin' => '1cm'
+    ]
+]);
+
+echo $grabby->grab();
+```
+
+Since Grabby is built on top of PhantomJS, you have all of the Web Page Module config options at your disposal. If you
+need to build complext configuration you can build up a config array using the module option as the array key and it's
+values as another array; Grabby will take care of the rest!
+
+You can check out the Web Page Module documentation here: http://phantomjs.org/api/webpage/
 
 ## Other File Formats
 
-You can generate screengrabs in `png`, `jpg` or `pdf` formats. Simply suffix the filename property with one of those extensions.
+You can generate screengrabs in `png`, `jpg` or `pdf` formats. Simply suffix the filename property with one of those 
+extensions.
 
 ## Accessing the Generated File
 
@@ -92,5 +125,5 @@ Please see [CONTRIBUTING](https://github.com/edcs/grabby/blob/master/CONTRIBUTIN
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within this package, please send an e-mail to edcoleridgesmith@gmail.com. All security 
-vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this package, please send an e-mail to edcoleridgesmith@gmail.com. All 
+security vulnerabilities will be promptly addressed.

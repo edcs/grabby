@@ -1,4 +1,6 @@
-composer.lock
+node_modules
 vendor
-tests/output/*.png
+tests/output/*.*
+!tests/output/.gitkeep
+composer.lock
 phpunit.xml
