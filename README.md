@@ -12,8 +12,8 @@ $ composer require edcs/grabby
 
 ## Dependencies
 
-Grabby requires PHP version >=5.4.0 and `symfony/process` 2.7.0. PhantomJS is also required; Grabby checks to see if a
-it is installed on the server and if not, it tries to use a bundled binary.
+Grabby requires PHP version >=5.4.0 and `symfony/process` ^3.1. PhantomJS is also required; Grabby will download the
+correct binary for your system.
 
 # Getting Started
 
@@ -88,7 +88,7 @@ $fileContents = $grabby->grab()->getScreengrab(); // Returns the contents of /my
 
 ## Contributing
 
-This project is a work in progress - contributions and pull requests are welcome.
+Please see [CONTRIBUTING](https://github.com/edcs/grabby/blob/master/CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
