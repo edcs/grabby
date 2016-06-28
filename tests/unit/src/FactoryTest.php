@@ -15,7 +15,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactoryCanBeConstructed()
     {
-        $grabby = new Factory('http://github.com');
+        $grabby = new Factory('https://httpbin.org/user-agent');
 
         $this->assertInstanceOf('Edcs\Grabby\Factory', $grabby);
     }
@@ -27,7 +27,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testValidFilenameIsAccepted()
     {
-        $grabby = new Factory('http://github.com', 'grabby.jpg');
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.jpg');
 
         $this->assertEquals('grabby.jpg', $grabby->getFilename());
     }
@@ -41,7 +41,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidFilenameIsRejected()
     {
-        new Factory('http://github.com', 'grabby.fail');
+        new Factory('https://httpbin.org/user-agent', 'grabby.fail');
     }
 
     /**
@@ -53,7 +53,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     {
         $dir = rtrim(__DIR__, '/').'/';
 
-        $grabby = new Factory('http://github.com', 'grabby.png', $dir);
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', $dir);
 
         $this->assertEquals($dir, $grabby->getStoragePath());
     }
@@ -67,7 +67,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidPathIsRejected()
     {
-        new Factory('http://github.com', 'grabby.png', 'this is not a valid directory');
+        new Factory('https://httpbin.org/user-agent', 'grabby.png', 'this is not a valid directory');
     }
 
     /**
@@ -79,7 +79,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     {
         $dir = rtrim(__DIR__, '/').'/';
 
-        $grabby = new Factory('http://github.com', 'grabby.png', $dir);
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', $dir);
 
         $this->assertEquals($dir.'grabby.png', $grabby->getScreengrabLocation());
     }
@@ -91,7 +91,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testScreenshotCanBeGrabbed()
     {
-        $grabby = new Factory('http://ecs.io', 'grabby.png', __DIR__.'/../../output/');
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', __DIR__.'/../../output/');
 
         $grabby->grab();
 
@@ -105,7 +105,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFileLocationCanBeChained()
     {
-        $grabby = new Factory('http://ecs.io', 'grabby.png', __DIR__.'/../../output/');
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', __DIR__.'/../../output/');
 
         $this->assertEquals(
             __DIR__.'/../../output/grabby.png',
@@ -120,7 +120,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFileContentsCanBeChained()
     {
-        $grabby = new Factory('http://ecs.io', 'grabby.png', __DIR__.'/../../output/');
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', __DIR__.'/../../output/');
 
         $this->assertNotNull(
             $grabby->grab()->getScreengrab()
