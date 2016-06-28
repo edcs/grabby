@@ -33,12 +33,6 @@
         ],
         "post-update-cmd": [
             "PhantomInstaller\\Installer::installPhantomJS"
-        ],
-        "post-package-install": [
-            "PhantomInstaller\\Installer::installPhantomJS"
-        ],
-        "post-package-update": [
-            "PhantomInstaller\\Installer::installPhantomJS"
         ]
     }
 }
