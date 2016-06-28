@@ -2,14 +2,22 @@
 
 namespace Edcs\Grabby\Tests;
 
-use AspectMock\Test as test;
 use Edcs\Grabby\FindPhantomJs;
 use PHPUnit_Framework_TestCase;
-use Symfony\Component\Process\Process;
 
 trait FindPhantomJsLinuxStub
 {
     use FindPhantomJs;
+
+    /**
+     * Returns the location of the version of PhantomJS installed on this server, or null if no version is available.
+     *
+     * @return null|string
+     */
+    protected function phantomServer()
+    {
+        return;
+    }
 
     /**
      * Returns a Linux uname.
@@ -31,10 +39,8 @@ class FindPhantomJsLinuxTest extends PHPUnit_Framework_TestCase
      *
      * @throws \Exception
      */
-    public function testLinuxx64PackageIsReturned()
+    public function testLinux64PackageIsReturned()
     {
-        test::double(Process::class, ['isSuccessful' => false]);
-
         $this->assertContains('bin/linux-x86_64/phantomjs', $this->getPhantomInstallation());
     }
 }
