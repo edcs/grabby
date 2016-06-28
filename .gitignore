@@ -1,3 +1,4 @@
 composer.lock
 vendor
 tests/output/*.png
+phpunit.xml
