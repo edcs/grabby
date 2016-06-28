@@ -8,6 +8,9 @@ use RuntimeException;
 
 class FactoryTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * The directory any output images should be stored.
+     */
     const OUTPUT = __DIR__.'/../../output/';
 
     /**
