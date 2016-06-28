@@ -48,6 +48,11 @@ class Factory
     const GRABBY_JS = 'grabby.js';
 
     /**
+     * The number of seconds the PhantomJS should excecute for before failing.
+     */
+    const TIMEOUT = 120;
+
+    /**
      * Creates a new Grabby instance.
      *
      * @param string $url
@@ -131,7 +136,7 @@ class Factory
      */
     public function grab()
     {
-        $this->phantomProcess()->setTimeout(10)->run();
+        $this->phantomProcess()->setTimeout(self::TIMEOUT)->run();
 
         return $this;
     }
