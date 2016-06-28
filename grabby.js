@@ -1,6 +1,26 @@
 var args = require('system').args,
-    each = require('@pod-point/utils').each,
     page = require('webpage').create();
+
+/**
+ * Performant object iteration. Callback is provided (value, key, object).
+ */
+var each = function (props, callback) {
+    if (!props) {
+        return;
+    }
+
+    var keys = Object.keys(props),
+        numKeys = keys.length;
+
+    for (var i = 0; i < numKeys; i++) {
+        var key = keys[i],
+            prop = props[key];
+
+        if (callback(prop, key, props) === false) {
+            break;
+        }
+    }
+}
 
 /**
  * PhantomJS config object is passed to this script using a URL encoded JSON string. This needs to be decoded and parsed
