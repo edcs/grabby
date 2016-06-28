@@ -4,6 +4,7 @@ namespace Edcs\Grabby;
 
 use PhantomInstaller\PhantomBinary;
 use RuntimeException;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class Factory
@@ -29,6 +30,11 @@ class Factory
      */
     private $url;
 
+    /**
+     * An array containing cofiguration for PhantomJS.
+     *
+     * @var array
+     */
     private $config;
 
     /**
@@ -45,7 +51,7 @@ class Factory
     /**
      * The name of the PhantomJS script used to generate screenshot.
      */
-    const GRABBY_JS = 'grabby.js';
+    const GRABBY_JS = __DIR__.'/../grabby.js';
 
     /**
      * The number of seconds the PhantomJS should excecute for before failing.
@@ -136,7 +142,13 @@ class Factory
      */
     public function grab()
     {
-        $this->phantomProcess()->setTimeout(self::TIMEOUT)->run();
+        $process = $this->phantomProcess();
+
+        $process->setTimeout(self::TIMEOUT)->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
 
         return $this;
     }
