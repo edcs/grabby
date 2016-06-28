@@ -9,6 +9,11 @@ use RuntimeException;
 class FactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * The directory any output images should be stored.
+     */
+    const OUTPUT = __DIR__.'/../../output/';
+
+    /**
      * Makes sure Grabby can be instatiated.
      *
      * @return void
@@ -17,7 +22,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     {
         $grabby = new Factory('https://httpbin.org/user-agent');
 
-        $this->assertInstanceOf('Edcs\Grabby\Factory', $grabby);
+        $this->assertInstanceOf(Factory::class, $grabby);
     }
 
     /**
@@ -91,11 +96,29 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testScreenshotCanBeGrabbed()
     {
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', __DIR__.'/../../output/');
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', self::OUTPUT);
 
         $grabby->grab();
 
-        $this->assertFileExists(__DIR__.'/../../output/grabby.png');
+        $this->assertFileExists(self::OUTPUT.'grabby.png');
+    }
+
+    /**
+     * @group f
+     */
+    public function testPdfScreenshotCanBeGrabbed()
+    {
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.pdf', self::OUTPUT, [
+            'paperSize' => [
+                'format'      => 'A4',
+                'orientation' => 'portrait',
+                'margin'      => '1cm',
+            ],
+        ]);
+
+        $grabby->grab();
+
+        $this->assertFileExists(self::OUTPUT.'grabby.pdf');
     }
 
     /**
@@ -105,12 +128,9 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFileLocationCanBeChained()
     {
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', __DIR__.'/../../output/');
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', self::OUTPUT);
 
-        $this->assertEquals(
-            __DIR__.'/../../output/grabby.png',
-            $grabby->grab()->getScreengrabLocation()
-        );
+        $this->assertEquals(self::OUTPUT.'grabby.png', $grabby->grab()->getScreengrabLocation());
     }
 
     /**
@@ -120,10 +140,8 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFileContentsCanBeChained()
     {
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', __DIR__.'/../../output/');
+        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', self::OUTPUT);
 
-        $this->assertNotNull(
-            $grabby->grab()->getScreengrab()
-        );
+        $this->assertNotNull($grabby->grab()->getScreengrab());
     }
 }
