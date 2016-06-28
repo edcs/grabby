@@ -113,7 +113,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
                 'format'      => 'A4',
                 'orientation' => 'portrait',
                 'margin'      => '1cm',
-            ]
+            ],
         ]);
 
         $grabby->grab();
