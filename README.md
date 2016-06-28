@@ -78,9 +78,35 @@ $grabby = new Factory('http://www.google.co.uk', 'screenshot.pdf', '/my/storage/
 echo $grabby->grab();
 ```
 
-Since Grabby is built on top of PhantomJS, you have all of the Web Page Module config options at your disposal. If you
-need to build complext configuration you can build up a config array using the module option as the array key and it's
-values as another array; Grabby will take care of the rest!
+Since Grabby is built on top of PhantomJS, you have all of the Web Page Module configuration options at your disposal. If
+you required a complex configuration, you can build up an array using the module option as the array key and it's properties
+as the value. The following example would create a `portrait` `A4` PDF with a `3cm` margin containing an image of Google's
+homepage viewied through a `150px` by `200px` viewport using a header called `X-Test` with the value `foo`:
+
+```php
+<?php
+
+use Edcs\Grabby\Factory;
+
+require 'vendor/autoload.php';
+
+$grabby = new Factory('http://www.google.co.uk', 'screenshot.pdf', '/my/storage/dir/', [
+    'customHeaders' => [
+        'X-Test': 'foo'
+    ],
+    'viewportSize' => [
+        'width' => 150,
+        'height' => 200
+    ],
+    'paperSize' => [
+        'format' => 'A4',
+        'orientation' => 'portrait',
+        'margin' => '3cm'
+    ]
+]);
+
+echo $grabby->grab();
+```
 
 You can check out the Web Page Module documentation here: http://phantomjs.org/api/webpage/
 
