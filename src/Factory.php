@@ -182,7 +182,7 @@ class Factory
             self::GRABBY_JS,
             $this->url,
             $this->storagePath.$this->filename,
-            urlencode(json_encode($this->config))
+            urlencode(json_encode($this->config)),
         ];
 
         return implode(' ', $command);

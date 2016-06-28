@@ -109,7 +109,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
             'paperSize' => [
                 'format'      => 'A4',
                 'orientation' => 'portrait',
-                'margin'      => '1cm'
+                'margin'      => '1cm',
             ]
         ]);
 
