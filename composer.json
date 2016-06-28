@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=5.4.0",
-        "symfony/process": "^3.1",
+        "symfony/process": "^3.0",
         "jakoch/phantomjs-installer": "2.1.1-p04"
     },
     "require-dev": {
