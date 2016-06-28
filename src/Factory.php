@@ -180,7 +180,7 @@ class Factory
      */
     protected function phantomProcess()
     {
-        $command = $this->createPhantomCommand(PhantomBinary::BIN);
+        $command = $this->createPhantomCommand();
 
         return new Process($command);
     }
@@ -188,14 +188,12 @@ class Factory
     /**
      * Creates the command string used to trigger PhantomJS.
      *
-     * @param string $phantomPath
-     *
      * @return string
      */
-    protected function createPhantomCommand($phantomPath)
+    protected function createPhantomCommand()
     {
         $command = [
-            $phantomPath,
+            PhantomBinary::BIN,
             self::GRABBY_JS,
             $this->url,
             $this->storagePath.$this->filename,
