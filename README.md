@@ -4,7 +4,22 @@ A PhantomJS adapter to generate screengrabs of webpages in PHP.
 
 ## Installation
 
-It is recommended that you install this library using Composer.
+It is recommended that you install this library using Composer. Before installing Grabby, add the following to the
+`scripts` namespace in your `composer.json` file:
+
+```javascript
+    "scripts": {
+        "post-install-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ],
+        "post-update-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ]
+    }
+```
+
+That takes care of installing the correct PhantomJS binary into your project directory. Next you need to run the
+following command to add Grabby to your project:
 
 ```bash
 $ composer require edcs/grabby
