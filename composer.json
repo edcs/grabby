@@ -16,10 +16,22 @@
     },
     "require": {
         "php": ">=5.4.0",
-        "symfony/process": "^3.1"
+        "symfony/process": "^3.1",
+        "jakoch/phantomjs-installer": "2.1.1-p04"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.4",
         "satooshi/php-coveralls": "^1.0"
+    },
+    "config": {
+        "bin-dir": "vendor/bin"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ],
+        "post-update-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ]
     }
 }
