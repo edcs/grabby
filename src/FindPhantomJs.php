@@ -32,8 +32,6 @@ trait FindPhantomJs
         if ($phantom->isSuccessful()) {
             return trim($phantom->getOutput());
         }
-
-        return;
     }
 
     /**
