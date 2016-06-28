@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@pod-point/utils": "^1.5.0"
+  }
+}
