@@ -2,13 +2,12 @@
 
 namespace Edcs\Grabby;
 
+use PhantomInstaller\PhantomBinary;
 use RuntimeException;
 use Symfony\Component\Process\Process;
 
 class Factory
 {
-    use FindPhantomJs;
-
     /**
      * The name of the generated image file.
      *
@@ -181,8 +180,7 @@ class Factory
      */
     protected function phantomProcess()
     {
-        $phantom = $this->getPhantomInstallation();
-        $command = $this->createPhantomCommand($phantom);
+        $command = $this->createPhantomCommand(PhantomBinary::BIN);
 
         return new Process($command);
     }
@@ -190,7 +188,7 @@ class Factory
     /**
      * Creates the command string used to trigger PhantomJS.
      *
-     * @param string command
+     * @param string $phantomPath
      *
      * @return string
      */
