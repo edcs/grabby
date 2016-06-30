@@ -47,7 +47,7 @@ class Grab
      */
     public function getStoragePath()
     {
-        return rtrim($this->storagePath, '/').'/';;
+        return rtrim($this->storagePath, '/').'/';
     }
 
     /**

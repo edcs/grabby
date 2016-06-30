@@ -135,7 +135,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidCommandIsHandled()
     {
-        $filesystem = new Filesystem;
+        $filesystem = new Filesystem();
 
         $filesystem->rename(PhantomBinary::BIN, PhantomBinary::BIN.'_');
 
