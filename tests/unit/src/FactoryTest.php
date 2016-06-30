@@ -3,8 +3,12 @@
 namespace Edcs\Grabby\Tests;
 
 use Edcs\Grabby\Factory;
+use Exception;
+use PhantomInstaller\PhantomBinary;
 use PHPUnit_Framework_TestCase;
 use RuntimeException;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class FactoryTest extends PHPUnit_Framework_TestCase
 {
@@ -14,27 +18,20 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     const OUTPUT = __DIR__.'/../../output/';
 
     /**
+     * The URL which we'll use for these tests.
+     */
+    const URL = 'https://httpbin.org/user-agent';
+
+    /**
      * Makes sure Grabby can be instatiated.
      *
      * @return void
      */
     public function testFactoryCanBeConstructed()
     {
-        $grabby = new Factory('https://httpbin.org/user-agent');
+        $grabby = new Factory(self::URL);
 
         $this->assertInstanceOf(Factory::class, $grabby);
-    }
-
-    /**
-     * Makes sure Grabby accepts valid file extesions.
-     *
-     * @return void
-     */
-    public function testValidFilenameIsAccepted()
-    {
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.jpg');
-
-        $this->assertEquals('grabby.jpg', $grabby->getFilename());
     }
 
     /**
@@ -46,7 +43,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidFilenameIsRejected()
     {
-        new Factory('https://httpbin.org/user-agent', 'grabby.fail');
+        new Factory(self::URL, 'grabby.fail');
     }
 
     /**
@@ -58,9 +55,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     {
         $dir = rtrim(__DIR__, '/').'/';
 
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', $dir);
-
-        $this->assertEquals($dir, $grabby->getStoragePath());
+        new Factory(self::URL, 'grabby.png', $dir);
     }
 
     /**
@@ -72,21 +67,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidPathIsRejected()
     {
-        new Factory('https://httpbin.org/user-agent', 'grabby.png', 'this is not a valid directory');
-    }
-
-    /**
-     * Makes sure Grabby generates a valid location for the generated screenshot.
-     *
-     * @return void
-     */
-    public function testValidFileLocationIsReturned()
-    {
-        $dir = rtrim(__DIR__, '/').'/';
-
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', $dir);
-
-        $this->assertEquals($dir.'grabby.png', $grabby->getScreengrabLocation());
+        new Factory(self::URL, 'grabby.png', 'this is not a valid directory');
     }
 
     /**
@@ -96,7 +77,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testScreenshotCanBeGrabbed()
     {
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', self::OUTPUT);
+        $grabby = new Factory(self::URL, 'grabby.png', self::OUTPUT);
 
         $grabby->grab();
 
@@ -104,11 +85,13 @@ class FactoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group f
+     * Ensures that Grabby can create a pdf from a website.
+     *
+     * @return void
      */
     public function testPdfScreenshotCanBeGrabbed()
     {
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.pdf', self::OUTPUT, [
+        $grabby = new Factory(self::URL, 'grabby.pdf', self::OUTPUT, [
             'paperSize' => [
                 'format'      => 'A4',
                 'orientation' => 'portrait',
@@ -128,7 +111,7 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFileLocationCanBeChained()
     {
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', self::OUTPUT);
+        $grabby = new Factory(self::URL, 'grabby.png', self::OUTPUT);
 
         $this->assertEquals(self::OUTPUT.'grabby.png', $grabby->grab()->getScreengrabLocation());
     }
@@ -140,8 +123,34 @@ class FactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFileContentsCanBeChained()
     {
-        $grabby = new Factory('https://httpbin.org/user-agent', 'grabby.png', self::OUTPUT);
+        $grabby = new Factory(self::URL, 'grabby.png', self::OUTPUT);
 
         $this->assertNotNull($grabby->grab()->getScreengrab());
+    }
+
+    /**
+     * Ensures that an exceptoion is thrown if the PhantomJS command fails for some reason.
+     *
+     * @return void
+     */
+    public function testInvalidCommandIsHandled()
+    {
+        $filesystem = new Filesystem;
+
+        $filesystem->rename(PhantomBinary::BIN, PhantomBinary::BIN.'_');
+
+        $grabby = new Factory(self::URL, 'grabby.png', self::OUTPUT);
+        $exceptionThrown = false;
+
+        try {
+            $grabby->grab();
+        } catch (Exception $ex) {
+            $this->assertInstanceOf(ProcessFailedException::class, $ex);
+            $exceptionThrown = true;
+        }
+
+        $this->assertTrue($exceptionThrown);
+
+        $filesystem->rename(PhantomBinary::BIN.'_', PhantomBinary::BIN);
     }
 }
