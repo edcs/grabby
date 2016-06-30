@@ -85,26 +85,18 @@ class Factory
      * @param string $filename
      *
      * @throws RuntimeException
+     *
+     * @return string
      */
     public function setFilename($filename)
     {
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
         if (in_array($extension, $this->allowedExtensions)) {
-            $this->filename = $filename;
-        } else {
-            throw new RuntimeException('Invalid file extension.');
+            return $this->filename = $filename;
         }
-    }
 
-    /**
-     * Getter for filename property.
-     *
-     * @return string
-     */
-    public function getFilename()
-    {
-        return $this->filename;
+        throw new RuntimeException('Invalid file extension.');
     }
 
     /**
@@ -126,19 +118,9 @@ class Factory
     }
 
     /**
-     * Getter for storage path property.
-     *
-     * @return string
-     */
-    public function getStoragePath()
-    {
-        return $this->storagePath;
-    }
-
-    /**
      * Creates a screengrab of the given URL.
      *
-     * @return Factory
+     * @return Grab
      */
     public function grab()
     {
@@ -150,27 +132,7 @@ class Factory
             throw new ProcessFailedException($process);
         }
 
-        return $this;
-    }
-
-    /**
-     * Returns the path of the generated screengrab.
-     *
-     * @return string
-     */
-    public function getScreengrabLocation()
-    {
-        return $this->storagePath.$this->filename;
-    }
-
-    /**
-     * Returns the contents of the generated screengrab.
-     *
-     * @return string
-     */
-    public function getScreengrab()
-    {
-        return file_get_contents($this->getScreengrabLocation());
+        return new Grab($this->storagePath, $this->filename);
     }
 
     /**
