@@ -45,7 +45,7 @@ require 'vendor/autoload.php';
 
 $grabby = new Factory('http://www.google.co.uk');
 
-echo $grabby->grab();
+$grabby->grab();
 ```    
 
 ## Extra Parameters
@@ -69,7 +69,7 @@ $grabby = new Factory('http://www.google.co.uk', 'screenshot.png', '/my/storage/
     ]
 ]);
 
-echo $grabby->grab();
+$grabby->grab();
 ```
 
 Grabby also supports creating PDF versions of web pages in different paper sizes. You can use the same config as above
@@ -90,7 +90,7 @@ $grabby = new Factory('http://www.google.co.uk', 'screenshot.pdf', '/my/storage/
     ]
 ]);
 
-echo $grabby->grab();
+$grabby->grab();
 ```
 
 Since Grabby is built on top of PhantomJS, you have all of the Web Page Module configuration options at your disposal. If
@@ -120,7 +120,7 @@ $grabby = new Factory('http://www.google.co.uk', 'screenshot.pdf', '/my/storage/
     ]
 ]);
 
-echo $grabby->grab();
+$grabby->grab();
 ```
 
 You can check out the Web Page Module documentation here: http://phantomjs.org/api/webpage/
