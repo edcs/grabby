@@ -162,7 +162,7 @@ $fileContents = $grabby->grab()->getScreengrab(); // Returns the contents of /my
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/edcs/grabby/blob/master/CONTRIBUTING) for details.
+Please see [CONTRIBUTING](https://github.com/edcs/grabby/blob/master/CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
