@@ -1,6 +1,8 @@
 # Grabby 
 [![Codeship Status for edcs/grabby](https://codeship.com/projects/da4c26b0-b5f2-0133-6bbf-724fe1788ad4/status?branch=master)](https://codeship.com/projects/134212) 
 [![Total Downloads](https://poser.pugx.org/edcs/grabby/downloads)](https://packagist.org/packages/edcs/grabby)
+[![Latest Stable Version](https://poser.pugx.org/edcs/grabby/v/stable)](https://packagist.org/packages/edcs/grabby)
+[![License](https://poser.pugx.org/edcs/grabby/license)](https://packagist.org/packages/edcs/grabby)
 [![Coverage Status](https://coveralls.io/repos/github/edcs/grabby/badge.svg?branch=master)](https://coveralls.io/github/edcs/grabby?branch=master) 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/8e1185a8-27f7-4eff-8de3-6b0e10179f90/mini.png)](https://insight.sensiolabs.com/projects/8e1185a8-27f7-4eff-8de3-6b0e10179f90)
 
